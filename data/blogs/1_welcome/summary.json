@@ -1,0 +1,22 @@
+{
+  "name": "Welcome",
+  "file": "welcome.md",
+  "chapters": [
+    {
+      "name": "Chapter 1",
+      "file": "ch01.md",
+      "children": [
+        {
+          "name": "Chapter 1.1",
+          "file": "ch01_01.md",
+          "children": null
+        }
+      ]
+    },
+    {
+      "name": "Chapter 2",
+      "file": "ch02.md",
+      "children": null
+    }
+  ]
+}
