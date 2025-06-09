@@ -1,10 +1,10 @@
 {
   "1_welcome": {
     "name": "1_welcome",
-    "title": "Welcome to my blog",
+    "title": "Welcome to my blog!",
     "description": "First publication of this site. Contains a welcome message for all readers.",
     "createdOn": "2025-05-17",
-    "updatedOn": "2025-05-17",
+    "updatedOn": "2025-06-09",
     "basePath": "/blogs/1_welcome/"
   }
 }
