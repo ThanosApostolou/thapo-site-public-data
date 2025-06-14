@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="292.87"
+   height="293.606"
+   viewBox="0 0 292.87 293.606"
+   version="1.1"
+   id="svg11"
+   sodipodi:docname="thapo_ska_logo.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview11"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.9242738"
+     inkscape:cx="74.573586"
+     inkscape:cy="120.30512"
+     inkscape:window-width="1920"
+     inkscape:window-height="1008"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Group_2850" />
+  <defs
+     id="defs11">
+    <linearGradient
+       id="linear-gradient"
+       x1="0.736"
+       y1="0.965"
+       x2="0"
+       y2="0.132"
+       gradientUnits="objectBoundingBox">
+      <stop
+         offset="0"
+         stop-color="#31cecd"
+         id="stop1" />
+      <stop
+         offset="0.473"
+         stop-color="#291a77"
+         id="stop2" />
+      <stop
+         offset="1"
+         stop-color="#31d3cf"
+         id="stop3" />
+    </linearGradient>
+    <linearGradient
+       id="linear-gradient-2"
+       x1="1.055"
+       y1="4.245"
+       x2="-0.054"
+       y2="4.84"
+       gradientUnits="objectBoundingBox">
+      <stop
+         offset="0"
+         stop-color="#31cecd"
+         id="stop4" />
+      <stop
+         offset="0.483"
+         stop-color="#291676"
+         id="stop5" />
+      <stop
+         offset="1"
+         stop-color="#30cccc"
+         id="stop6" />
+    </linearGradient>
+    <linearGradient
+       id="linear-gradient-4"
+       x1="0.5"
+       x2="0.5"
+       y2="0.987"
+       gradientUnits="objectBoundingBox">
+      <stop
+         offset="0"
+         stop-color="#31cccd"
+         id="stop7" />
+      <stop
+         offset="0.493"
+         stop-color="#291676"
+         id="stop8" />
+      <stop
+         offset="1"
+         stop-color="#30d0ce"
+         id="stop9" />
+    </linearGradient>
+    <linearGradient
+       id="linear-gradient-6"
+       x1="0.736"
+       y1="0.035"
+       y2="0.868"
+       xlink:href="#linear-gradient" />
+    <linearGradient
+       id="linear-gradient-7"
+       x1="0.5"
+       x2="0.5"
+       y2="1"
+       gradientUnits="objectBoundingBox">
+      <stop
+         offset="0"
+         stop-color="#aa99e6"
+         id="stop10" />
+      <stop
+         offset="1"
+         stop-color="#5640a4"
+         id="stop11" />
+    </linearGradient>
+  </defs>
+  <g
+     id="Group_2851"
+     data-name="Group 2851"
+     transform="translate(-8076.271 -1477.882)">
+    <g
+       id="Group_2850"
+       data-name="Group 2850"
+       transform="translate(8076.271 1477.882)">
+      <path
+         id="Union_37"
+         data-name="Union 37"
+         d="M41.6,0H0V10.661H38.654L162.389,228.288a5.327,5.327,0,0,0,4.723,2.7h41.666v-10.66H170.125L46.389,2.7A5.332,5.332,0,0,0,41.747,0Z"
+         transform="translate(251.712 260.889) rotate(180)"
+         fill="url(#linear-gradient)"
+         style="fill:#0095ef;fill-opacity:1" />
+      <path
+         id="Line_73"
+         data-name="Line 73"
+         d="M 251.637,4.661 H -0.669 C -3.6128395,4.6610001 -5.9994478,2.2748395 -6,-0.669 -6,-3.61323 -3.61323,-6 -0.669,-6 H 29.977303 251.637 c 2.94423,0 5.331,2.38677 5.331,5.331 -5.5e-4,2.9438395 -2.38716,5.3300001 -5.331,5.33 z"
+         transform="translate(20.951,147.708)"
+         fill="url(#linear-gradient-2)"
+         style="fill:#0095ef;fill-opacity:1"
+         sodipodi:nodetypes="sscscscs" />
+      <path
+         id="Line_75"
+         data-name="Line 75"
+         d="M-.669,256.967A5.331,5.331,0,0,1-6,251.637V-.669A5.331,5.331,0,0,1-.669-6,5.331,5.331,0,0,1,4.661-.669V251.637a5.331,5.331,0,0,1-5.331,5.331Z"
+         transform="translate(147.943 21.688)"
+         fill="url(#linear-gradient-4)"
+         style="fill:#0095ef;fill-opacity:1" />
+      <path
+         id="Union_39"
+         data-name="Union 39"
+         d="M 41.6,230.985 H 0 V 220.324 H 38.654 L 162.389,2.7 c 0.95936,-1.6928492 2.76541,-2.72793944 4.711,-2.7 h 41.67 V 10.66 H 170.117 L 46.389,228.288 c -0.947569,1.66945 -2.719381,2.70068 -4.639,2.7 z"
+         transform="translate(42.935,29.902)"
+         fill="url(#linear-gradient-6)"
+         sodipodi:nodetypes="cccccccccccc"
+         style="fill:#0095ef;fill-opacity:1" />
+      <ellipse
+         id="Ellipse_138"
+         data-name="Ellipse 138"
+         cx="15.526"
+         cy="14.951"
+         rx="15.526"
+         ry="14.951"
+         transform="translate(20.27 20.089)"
+         fill="#7561bb"
+         style="fill:#3c50b1;fill-opacity:1" />
+      <ellipse
+         id="Ellipse_139"
+         data-name="Ellipse 139"
+         cx="15.526"
+         cy="14.951"
+         rx="15.526"
+         ry="14.951"
+         transform="translate(20.27 240.902)"
+         fill="#7561bb"
+         style="fill:#3c50b1;fill-opacity:1" />
+      <circle
+         id="Ellipse_136"
+         data-name="Ellipse 136"
+         cx="14.951"
+         cy="14.951"
+         r="14.951"
+         transform="translate(242.233 240.902)"
+         fill="#7561bb"
+         style="fill:#3c50b1;fill-opacity:1" />
+      <circle
+         id="Ellipse_130"
+         data-name="Ellipse 130"
+         cx="14.951"
+         cy="14.951"
+         r="14.951"
+         transform="translate(242.233 20.089)"
+         fill="#7561bb"
+         style="fill:#3c50b1;fill-opacity:1" />
+      <circle
+         id="Ellipse_134"
+         data-name="Ellipse 134"
+         cx="14.951"
+         cy="14.951"
+         r="14.951"
+         transform="translate(262.968 130.444)"
+         fill="#7561bb"
+         style="fill:#3c50b1;fill-opacity:1" />
+      <circle
+         id="Ellipse_142"
+         data-name="Ellipse 142"
+         cx="14.951"
+         cy="14.951"
+         r="14.951"
+         transform="translate(0 130.444)"
+         fill="#7561bb"
+         style="fill:#3c50b1;fill-opacity:1" />
+      <circle
+         id="Ellipse_135"
+         data-name="Ellipse 135"
+         cx="14.951"
+         cy="14.951"
+         r="14.951"
+         transform="translate(132.373)"
+         fill="#7561bb"
+         style="fill:#3c50b1;fill-opacity:1" />
+      <circle
+         id="Ellipse_140"
+         data-name="Ellipse 140"
+         cx="14.951"
+         cy="14.951"
+         r="14.951"
+         transform="translate(132.373 263.704)"
+         fill="#7561bb"
+         style="fill:#3c50b1;fill-opacity:1" />
+      <rect
+         id="Rectangle_1252"
+         data-name="Rectangle 1252"
+         width="163.309"
+         height="163.309"
+         rx="8"
+         transform="translate(65.242 67.99)"
+         fill="url(#linear-gradient-7)"
+         style="fill:#4e004f;fill-opacity:1" />
+      <rect
+         id="Rectangle_1253"
+         data-name="Rectangle 1253"
+         width="142.608"
+         height="142.608"
+         rx="8"
+         transform="translate(75.593 78.34)"
+         fill="#fff" />
+      <text
+         id="AI"
+         fill="#7561bb"
+         font-size="92px"
+         font-family="Quicksand-Bold, Quicksand"
+         font-weight="700"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:64px;font-family:'TeX Gyre Cursor';-inkscape-font-specification:'TeX Gyre Cursor, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#4e004f;fill-opacity:1"
+         x="85.118896"
+         y="166.96863"><tspan
+           x="85.118896"
+           y="166.96863"
+           id="tspan11"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:64px;font-family:'TeX Gyre Cursor';-inkscape-font-specification:'TeX Gyre Cursor, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#4e004f;fill-opacity:1">SKA</tspan></text>
+    </g>
+  </g>
+</svg>

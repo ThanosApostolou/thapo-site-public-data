@@ -1,0 +1,14 @@
+{
+  "files": [
+    {
+      "name": "README",
+      "path": "thapo-ska.md",
+      "type": "md"
+    },
+    {
+      "name": "THESIS",
+      "path": "specific-knowledge-assistant.pdf",
+      "type": "pdf"
+    }
+  ]
+}
