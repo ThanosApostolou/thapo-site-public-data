@@ -5,7 +5,7 @@
 
 
 
-**Specific Knowledge Assistant** is a project software system developed for the purposes of MSc "Advanced Informatics and Computing Systems - Software Development and Artificial Intelligence" of University of Piraeus. This system is utilizing custom text-generation machine learning models or pre-trained Large Language Models (LLMs) in order to assist specific knowledge discovery.
+**Specific Knowledge Assistant** is a software system developed for the purposes of MSc "Advanced Informatics and Computing Systems - Software Development and Artificial Intelligence" of University of Piraeus. This system is utilizing custom text-generation machine learning models or pre-trained Large Language Models (LLMs) in order to assist specific knowledge discovery.
 
 ## Purpose
 This website serves 4 purposes.
@@ -79,7 +79,7 @@ The keycloak component is used as a user pool and as a user authentication and a
 The PostgreSQL database is used in order to persist users’ data. Specifically we use the table users to store each user who logs in to our application. We update their details in each login. Each user can have multiple chats which we store to table user_chat . Each chat can have multiple messages some of them are “ANSWER” type and some of them are “QUESTION” type. We store the messages to table chat_message .
 
 ### api gateway
-The api gateway is implemented by either using a nginx reverse proxy or a kubernetes Ingress [77] depending on the deployment method. All the incoming http requests reach this component at first and then they get redirected to the desired service. This enables us to have a single component which can be configured with rules. Additionally, we have the benefit to serve the whole application under a single owned domain name and redirect the traffic based on http paths. 
+The api gateway is implemented by either using a nginx reverse proxy or a kubernetes Ingress [77] depending on the deployment method. All the incoming http requests reach this component at first and then they get redirected to the desired service. This enables us to have a single component which can be configured with rules. Additionally, we have the benefit to serve the whole application under a single owned domain name and redirect the traffic based on http paths.
 
 ### Deployment
 Deployment of all components can done by either using Docker/Podman or Kubernetes.
