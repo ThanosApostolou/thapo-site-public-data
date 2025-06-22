@@ -43,8 +43,8 @@
     <rect
        x="193.87698"
        y="431.30606"
-       width="368.0853"
-       height="112.39246"
+       width="84.502959"
+       height="96.76635"
        id="rect1" />
   </defs>
   <g
@@ -52,12 +52,13 @@
      id="layer2"
      inkscape:label="Layer 2">
     <rect
-       style="fill:#ebeef5;fill-opacity:1;stroke-width:0.323633"
+       style="fill:#3178c6;fill-opacity:1;stroke-width:0.323633"
        id="rect3"
        width="300.87869"
        height="200.35417"
        x="-0.54881287"
-       y="-0.17708588" />
+       y="-0.17708588"
+       inkscape:label="rect3" />
   </g>
   <g
      inkscape:label="Layer 1"
@@ -65,12 +66,12 @@
      id="layer1">
     <text
        xml:space="preserve"
-       transform="matrix(1.0065731,0,0,1.9175586,-129.65056,-780.27552)"
+       transform="matrix(1.0065731,0,0,1.9175586,-73.01098,-784.31702)"
        id="text1"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50.7849px;font-family:'TeX Gyre Chorus';-inkscape-font-specification:'TeX Gyre Chorus, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect1);display:inline;fill:#5e35b1;fill-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50.7849px;font-family:'TeX Gyre Chorus';-inkscape-font-specification:'TeX Gyre Chorus, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect1);shape-padding:0;display:inline;fill:#ffffff;fill-opacity:1"
        inkscape:label="text1"><tspan
          x="193.87695"
          y="475.845"
-         id="tspan2">Welcome</tspan></text>
+         id="tspan2">TS</tspan></text>
   </g>
 </svg>

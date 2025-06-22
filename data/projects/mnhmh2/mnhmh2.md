@@ -4,7 +4,7 @@
 ![](./mnhmh2_logo_100.png)
 
 
-Application implementing a web interface for managing and exporting tables and aggregated statements for the needs of the “General Material Management Office” of the 196 Α/Κ ΜΒΠ Army Unit.
+Application implementing a web interface for managing and exporting tables and aggregated statements for the needs of the "General Material Management Office" of the 196 Α/Κ ΜΒΠ Army Unit.
 
 ## Modules, Components and Technologies
 This project uses the following components:
