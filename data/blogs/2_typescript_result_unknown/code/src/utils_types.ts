@@ -148,7 +148,7 @@ export class UtilsTypes {
     /**
      * uses expensive for loop
      */
-    static unknownArrayToArrayTypeNullable<V>(arr: unknown[],
+    static unknownArrayToArrayTypeNullable<V>(arr: unknown[] | null | undefined,
         valueF: (unk: unknown) => unk is V
     ): Result<V[] | null, Error> {
         if (arr == null) {
@@ -175,7 +175,7 @@ export class UtilsTypes {
     /**
      * uses expensive for loop
      */
-    static unknownObjectToRecordNullable<K extends string | number | symbol, V>(obj: UnknownObject | null,
+    static unknownObjectToRecordNullable<K extends string | number | symbol, V>(obj: UnknownObject | null | undefined,
         keyF: (unk: unknown) => unk is K,
         valueF: (unk: unknown) => unk is V
     ): Result<Record<K, V> | null, Error> {
