@@ -1,5 +1,14 @@
 {
   "name": "SUMMARY",
   "file": "summary.md",
-  "chapters": []
+  "chapters": [
+    {
+      "name": "Result Type",
+      "file": "1_result.md"
+    },
+    {
+      "name": "Unknown Handling",
+      "file": "2_unknown.md"
+    }
+  ]
 }

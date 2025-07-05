@@ -1,6 +1,3 @@
-//
-// ATTEMPT 3
-//
 export type Result<O, E> = Ok<O, E> | Err<O, E>;
 
 export class Ok<O, E> {
