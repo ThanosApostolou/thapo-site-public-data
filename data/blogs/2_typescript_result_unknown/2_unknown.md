@@ -324,7 +324,7 @@ class RateLimit {
 }
 ```
 
-We will also create a intentionally wrong class which has the "resources" field misspelled as `resourcess`
+We will also create an intentionally wrong class which has the "resources" field misspelled as `resourcess`
 
 ```typescript
 class GithubRateLimitResponseWrong {
