@@ -12,7 +12,7 @@
     "title": "TypeScript rust-like Result Type and type safe handling of unknown",
     "description": "Create rust-like Result Type in TypeScript and handle unknown types in a type safe manner",
     "createdOn": "2025-06-21",
-    "updatedOn": "2025-06-21",
+    "updatedOn": "2025-07-12",
     "basePath": "/blogs/2_typescript_result_unknown/"
   }
 }
