@@ -14,5 +14,13 @@
     "createdOn": "2025-06-21",
     "updatedOn": "2025-07-12",
     "basePath": "/blogs/2_typescript_result_unknown/"
+  },
+  "3_local_bigdata_infra": {
+    "name": "3_bigdata_infra",
+    "title": "Set up a local BigData Infrastructure (Hadoop, Hive, Spark, Flink, Kafka)",
+    "description": "Create rust-like Result Type in TypeScript and handle unknown types in a type safe manner",
+    "createdOn": "2025-08-18",
+    "updatedOn": "2025-08-18",
+    "basePath": "/blogs/3_bigdata_infra/"
   }
 }

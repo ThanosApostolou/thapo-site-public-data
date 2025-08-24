@@ -1,0 +1,223 @@
+name: infrahadoop
+
+networks:
+  infrahadoopnetwork:
+    name: infrahadoopnetwork
+  infratemplatesnetwork:
+    external: true
+
+volumes:
+  infrahadoop_namenode_dfs:
+
+  infrahadoop_datanode_dfs:
+
+  # infrahadoop_conf:
+
+services:
+  infrahadoopnamenode:
+    container_name: infrahadoopnamenode
+    hostname: infrahadoopnamenode
+    image: custom/hadoop:3.4.0
+    build:
+      context: images
+      dockerfile: ./Hadoop.Dockerfile
+    user: hadoop
+    command: ["hdfs", "namenode"]
+    ports:
+      - 9870:9870
+    environment:
+        ENSURE_NAMENODE_DIR: "/tmp/hadoop-hadoop/dfs/name"
+    volumes:
+      - infrahadoop_namenode_dfs:/tmp/hadoop-hadoop/dfs
+      - .:/training
+      - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml:ro
+      - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml:ro
+      - ./config/mapred-site.xml:/opt/hadoop/etc/hadoop/mapred-site.xml:ro
+      - ./config/yarn-site.xml:/opt/hadoop/etc/hadoop/yarn-site.xml:ro
+    networks:
+      - infrahadoopnetwork
+
+  infrahadoopdatanode:
+    container_name: infrahadoopdatanode
+    hostname: infrahadoopdatanode
+    image: custom/hadoop:3.4.0
+    build:
+      context: images
+      dockerfile: ./Hadoop.Dockerfile
+    user: hadoop
+    command: ["hdfs", "datanode"]
+    volumes:
+      - infrahadoop_datanode_dfs:/tmp/hadoop-hadoop/dfs
+      - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml:ro
+      - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml:ro
+      - ./config/mapred-site.xml:/opt/hadoop/etc/hadoop/mapred-site.xml:ro
+      - ./config/yarn-site.xml:/opt/hadoop/etc/hadoop/yarn-site.xml:ro
+    networks:
+      - infrahadoopnetwork
+    depends_on:
+      - infrahadoopnamenode
+
+  infrahadoopresourcemanager:
+    container_name: infrahadoopresourcemanager
+    hostname: infrahadoopresourcemanager
+    image: custom/hadoop:3.4.0
+    build:
+      context: images
+      dockerfile: ./Hadoop.Dockerfile
+    user: hadoop
+    command: ["yarn", "resourcemanager"]
+    ports:
+      - 8088:8088
+    volumes:
+      - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml:ro
+      - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml:ro
+      - ./config/mapred-site.xml:/opt/hadoop/etc/hadoop/mapred-site.xml:ro
+      - ./config/yarn-site.xml:/opt/hadoop/etc/hadoop/yarn-site.xml:ro
+    networks:
+      - infrahadoopnetwork
+    depends_on:
+      - infrahadoopnamenode
+      - infrahadoopdatanode
+
+  infrahadoopnodemanager:
+    container_name: infrahadoopnodemanager
+    hostname: infrahadoopnodemanager
+    image: custom/hadoop:3.4.0
+    build:
+      context: images
+      dockerfile: ./Hadoop.Dockerfile
+    user: hadoop
+    command: ["yarn", "nodemanager"]
+    ports:
+      - 8042:8042
+    volumes:
+      - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml:ro
+      - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml:ro
+      - ./config/mapred-site.xml:/opt/hadoop/etc/hadoop/mapred-site.xml:ro
+      - ./config/yarn-site.xml:/opt/hadoop/etc/hadoop/yarn-site.xml:ro
+    networks:
+      - infrahadoopnetwork
+    depends_on:
+      - infrahadoopnamenode
+      - infrahadoopdatanode
+      - infrahadoopresourcemanager
+
+  infrahadoophivemetastore:
+    container_name: infrahadoophivemetastore
+    hostname: infrahadoophivemetastore
+    image: custom/hive:4.0.1
+    build:
+      context: images
+      dockerfile: ./Hive.Dockerfile
+    user: hive
+    environment:
+      - SERVICE_NAME=metastore
+      - DB_DRIVER=postgres
+      - SERVICE_OPTS=-Djavax.jdo.option.ConnectionDriverName=org.postgresql.Driver -Djavax.jdo.option.ConnectionURL=jdbc:postgresql://infratemplatespostgres:5432/hivedb -Djavax.jdo.option.ConnectionUserName=hiveuser -Djavax.jdo.option.ConnectionPassword=@INFRATEMPLATEShive
+    volumes:
+      - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml:ro
+      - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml:ro
+      - ./config/mapred-site.xml:/opt/hadoop/etc/hadoop/mapred-site.xml:ro
+      - ./config/yarn-site.xml:/opt/hadoop/etc/hadoop/yarn-site.xml:ro
+      - ./config/hive-site.xml:/opt/hive/conf/hive-site.xml:ro
+    ports:
+      - 9083:9083
+    networks:
+      - infratemplatesnetwork
+      - infrahadoopnetwork
+    depends_on:
+      - infrahadoopnamenode
+      - infrahadoopdatanode
+      - infrahadoopresourcemanager
+      - infrahadoopnodemanager
+
+
+  infrahadoophive:
+    container_name: infrahadoophive
+    hostname: infrahadoophive
+    image: custom/hive:4.0.1
+    build:
+      context: images
+      dockerfile: ./Hive.Dockerfile
+    user: hive
+    environment:
+      - SERVICE_NAME=hiveserver2
+    volumes:
+      - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml:ro
+      - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml:ro
+      - ./config/mapred-site.xml:/opt/hadoop/etc/hadoop/mapred-site.xml:ro
+      - ./config/yarn-site.xml:/opt/hadoop/etc/hadoop/yarn-site.xml:ro
+      - ./config/hive-site.xml:/opt/hive/conf/hive-site.xml:ro
+    ports:
+      - 10000:10000
+      - 10002:10002
+    networks:
+      - infrahadoopnetwork
+    depends_on:
+      - infrahadoopnamenode
+      - infrahadoopdatanode
+      - infrahadoopresourcemanager
+      - infrahadoopnodemanager
+
+  infrahadoopspark:
+    container_name: infrahadoopspark
+    hostname: infrahadoopspark
+    image: custom/hadoop:3.4.0
+    build:
+      context: images
+      dockerfile: ./Hadoop.Dockerfile
+    volumes:
+      - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml:ro
+      - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml:ro
+      - ./config/mapred-site.xml:/opt/hadoop/etc/hadoop/mapred-site.xml:ro
+      - ./config/yarn-site.xml:/opt/hadoop/etc/hadoop/yarn-site.xml:ro
+      - ./config/hive-site.xml:/opt/hive/conf/hive-site.xml:ro
+      - ./config/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf:ro
+    ports:
+      - 18080:18080
+    command: /opt/spark/sbin/start-history-server.sh
+    environment:
+      - SPARK_NO_DAEMONIZE=false
+    networks:
+      - infrahadoopnetwork
+    depends_on:
+      - infrahadoopnamenode
+      - infrahadoopdatanode
+      - infrahadoopresourcemanager
+      - infrahadoopnodemanager
+      - infrahadoophive
+
+  # hiveserver2:
+  #   image: custom/hadoop:3.3.6
+  #   build:
+  #     context: .
+  #     dockerfile: images/Hadoop.Dockerfile
+  #   command: ["hive", "--service", "hiveserver2"]
+  #   ports:
+  #    - 10000:10000
+  #    - 9083:9083
+  #   networks:
+  #     - hadoop
+  #   depends_on:
+  #     - namenode
+  #     - datanode
+  #     - resourcemanager
+  #     - nodemanager
+
+
+  # sparkclient:
+  #   image: docker.io/apache/spark:3.5.0
+  #   command: ["bash"]
+  #   networks:
+  #     - hadoop
+  #   environment:
+  #     - HADOOP_CONF_DIR=/hadoop
+  #     - YARN_CONF_DIR=/hadoop
+  #     - HADOOP_USER_NAME=hadoop
+  #   volumes:
+  #     - hadoop_conf:/hadoop:ro
+  #   depends_on:
+  #     - namenode
+  #     - datanode
+  #     - resourcemanager
+  #     - nodemanager
