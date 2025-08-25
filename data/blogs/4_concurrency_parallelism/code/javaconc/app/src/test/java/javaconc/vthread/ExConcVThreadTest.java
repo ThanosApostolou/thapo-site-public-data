@@ -1,14 +1,14 @@
-package javaconc.thread;
+package javaconc.vthread;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ExConcThreadTest {
+class ExConcVThreadTest {
 
     @Test
-    void run() throws InterruptedException {
-        final MyState myState = ExConcThread.run();
+    void runCpu() throws InterruptedException {
+        final MyState myState = ExConcVThread.runCpu();
         assertEquals(500, myState.getResults().size());
         assertEquals(500, myState.getTaskInfos().size());
         final long sumTries = myState.getTaskInfos().stream()
@@ -17,10 +17,9 @@ class ExConcThreadTest {
         assertEquals(myState.getTotalTries(), sumTries);
     }
 
-
     @Test
-    void runPoolCpu() throws InterruptedException {
-        final MyState myState = ExConcThread.runPoolCpu();
+    void runIO() throws InterruptedException {
+        final MyState myState = ExConcVThread.runIO();
         assertEquals(500, myState.getResults().size());
         assertEquals(500, myState.getTaskInfos().size());
         final long sumTries = myState.getTaskInfos().stream()
@@ -28,17 +27,4 @@ class ExConcThreadTest {
                 .reduce(0L, Long::sum);
         assertEquals(myState.getTotalTries(), sumTries);
     }
-
-
-    @Test
-    void runPoolIO() throws InterruptedException {
-        final MyState myState = ExConcThread.runPoolIO();
-        assertEquals(500, myState.getResults().size());
-        assertEquals(500, myState.getTaskInfos().size());
-        final long sumTries = myState.getTaskInfos().stream()
-                .map(MyState.TaskInfo::tries)
-                .reduce(0L, Long::sum);
-        assertEquals(myState.getTotalTries(), sumTries);
-    }
-
 }

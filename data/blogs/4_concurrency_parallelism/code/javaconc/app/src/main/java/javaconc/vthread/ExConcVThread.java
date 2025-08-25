@@ -1,4 +1,4 @@
-package javaconc.thread;
+package javaconc.vthread;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -8,32 +8,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class ExConcThread {
-
-    public static MyState run() throws InterruptedException {
-        System.out.printf("START parent thread name=%s, id=%s%n", Thread.currentThread().getName(), Thread.currentThread().threadId());
-        final long startTs = Instant.now().toEpochMilli();
-        final List<Thread> threads = new ArrayList<>();
-        final MyState myState = new MyState();
-        for (int i = 0; i < 500; i++) {
-            threads.add(new Thread(new MyTaskCpu(myState)));
-        }
-        // start threads
-        for (final Thread thread : threads) {
-            thread.start();
-        }
-        // wait all threads to finish
-        for (final Thread thread : threads) {
-            thread.join();
-        }
-
-        final long endTs = Instant.now().toEpochMilli();
-        System.out.printf("END parent thread name=%s, id=%s, myState=%s, duration=%sms%n", Thread.currentThread().getName(), Thread.currentThread().threadId(), myState, endTs - startTs);
-        return myState;
-    }
+public class ExConcVThread {
 
 
-    public static MyState runPoolCpu() throws InterruptedException {
+    public static MyState runCpu() throws InterruptedException {
         System.out.printf("START parent thread name=%s, id=%s%n", Thread.currentThread().getName(), Thread.currentThread().threadId());
         final long startTs = Instant.now().toEpochMilli();
         final List<Runnable> runnables = new ArrayList<>();
@@ -41,7 +19,7 @@ public class ExConcThread {
         for (int i = 0; i < 500; i++) {
             runnables.add(new MyTaskCpu(myState));
         }
-        try (final ExecutorService executorService = Executors.newFixedThreadPool(64)) {
+        try (final ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()) {
             final List<Future<?>> futures = new ArrayList<>();
             // start runnables
             for (final Runnable runnable : runnables) {
@@ -62,7 +40,7 @@ public class ExConcThread {
         return myState;
     }
 
-    public static MyState runPoolIO() throws InterruptedException {
+    public static MyState runIO() throws InterruptedException {
         System.out.printf("START parent thread name=%s, id=%s%n", Thread.currentThread().getName(), Thread.currentThread().threadId());
         final long startTs = Instant.now().toEpochMilli();
         final List<Runnable> runnables = new ArrayList<>();
@@ -70,7 +48,7 @@ public class ExConcThread {
         for (int i = 0; i < 500; i++) {
             runnables.add(new MyTaskIO(myState));
         }
-        try (final ExecutorService executorService = Executors.newFixedThreadPool(16)) {
+        try (final ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()) {
             final List<Future<?>> futures = new ArrayList<>();
             // start runnables
             for (final Runnable runnable : runnables) {

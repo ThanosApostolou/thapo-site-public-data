@@ -1,4 +1,4 @@
-package javaconc.thread;
+package javaconc.vthread;
 
 import java.util.ArrayList;
 import java.util.Collections;

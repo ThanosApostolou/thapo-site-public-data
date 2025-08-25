@@ -3,21 +3,14 @@ package javaconc.thread;
 import javaconc.Utils;
 
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.UUID;
 
-public class MyThread extends Thread {
+public class MyTaskCpu implements Runnable {
     private final MyState myState;
-    private final MessageDigest messageDigest;
 
-    public MyThread(final MyState myState) {
+    public MyTaskCpu(final MyState myState) {
         this.myState = myState;
-        try {
-            messageDigest = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
@@ -29,6 +22,7 @@ public class MyThread extends Thread {
             String hash;
             long tries = 0;
             do {
+                final MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
                 hash = Utils.hash(messageDigest, UUID.randomUUID().toString());
                 tries++;
             } while (!hash.startsWith("0000"));
