@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: "pocspring"
+  datasource:
+    url: "jdbc:postgresql://localhost:11432/pocwebframeworks_db"
+    username: "pocwebframeworks_user"
+    password: "pocwebframeworks_password"
+    hikari:
+      schema: "pocwebframeworks_schema"
+server:
+  port: 11082
+  servlet:
+    context-path: "/pocspring"

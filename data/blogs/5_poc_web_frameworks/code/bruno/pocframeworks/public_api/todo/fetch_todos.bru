@@ -1,0 +1,15 @@
+meta {
+  name: fetch_todos
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:11080/pocspring/public_api/todo/fetch_todos
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

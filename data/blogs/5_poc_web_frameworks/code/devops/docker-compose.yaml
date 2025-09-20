@@ -24,9 +24,15 @@ services:
       - "11432:5432"
     networks:
       - pocwebframeworks_network
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: "1000m"
 
   pocwebframeworks-pgadmin:
     container_name: pocwebframeworks-pgadmin
+    hostname: pocwebframeworks-pgadmin
     image: "docker.io/dpage/pgadmin4:9.7"
     restart: no
     links:
@@ -42,6 +48,11 @@ services:
       - "11480:80"
     networks:
       - pocwebframeworks_network
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "200m"
 
   pocwebframeworks-iam:
     container_name: pocwebframeworks-iam
@@ -62,6 +73,11 @@ services:
       - "11081:11081"
     networks:
       - pocwebframeworks_network
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "1000m"
 
   pocwebframeworks-gateway:
     container_name: pocwebframeworks-gateway
@@ -75,3 +91,11 @@ services:
       - ./nginx-gateway.conf:/etc/nginx/conf.d/nginx-gateway.conf:ro
     extra_hosts:
       - "host.docker.internal:10.0.2.2"
+    depends_on:
+      - pocwebframeworks-pgadmin
+      - pocwebframeworks-iam
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "200m"
