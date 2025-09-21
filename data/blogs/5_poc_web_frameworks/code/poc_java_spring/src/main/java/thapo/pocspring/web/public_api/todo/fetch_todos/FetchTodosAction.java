@@ -2,6 +2,9 @@ package thapo.pocspring.web.public_api.todo.fetch_todos;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +24,9 @@ public class FetchTodosAction {
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
     public FetchTodosResDto fetchTodos() {
-        final Iterable<Todo> todos = todoRepository.findAll();
+        final Page<Todo> todoPage = todoRepository.findAll(PageRequest.of(0, 100, Sort.by(Sort.Order.asc("dueDate"))));
+
+        final Iterable<Todo> todos = todoPage;
         final List<TodoDto> todoDtos = StreamSupport.stream(todos.spliterator(), false)
                 .map(TodoDto::fromTodo)
                 .toList();
