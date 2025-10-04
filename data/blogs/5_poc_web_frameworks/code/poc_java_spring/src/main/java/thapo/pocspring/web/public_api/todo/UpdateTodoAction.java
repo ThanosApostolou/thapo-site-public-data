@@ -1,4 +1,4 @@
-package thapo.pocspring.web.public_api.todo.create_todo;
+package thapo.pocspring.web.public_api.todo;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,21 +16,25 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class CreateTodoAction {
-    public static final String PATH = "/create_todo";
+public class UpdateTodoAction {
 
     private final TodoRepository todoRepository;
     private final TodoService todoService;
 
 
+    public record UpdateTodoResDto(TodoDto todo) {
+    }
+
     @Transactional(isolation = Isolation.REPEATABLE_READ)
-    public CreateTodoResDto createTodo(final TodoDto todoDto) {
+    public UpdateTodoResDto updateTodo(final TodoDto todoDto) {
         final List<String> errors = new ArrayList<>();
-        Todo todo = todoService.createNew(todoDto, errors);
+        final Todo todo = todoService.updateTodo(todoDto, errors);
         if (!errors.isEmpty() || todo == null) {
             throw new AppException(errors);
         }
-        todo = todoRepository.save(todo);
-        return new CreateTodoResDto(todo.getId());
+        todoRepository.save(todo);
+        final TodoDto updatedTodo = TodoDto.fromTodo(todo);
+        return new UpdateTodoResDto(updatedTodo);
     }
+
 }

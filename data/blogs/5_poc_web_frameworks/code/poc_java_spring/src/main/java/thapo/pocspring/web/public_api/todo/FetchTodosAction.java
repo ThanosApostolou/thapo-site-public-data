@@ -1,4 +1,4 @@
-package thapo.pocspring.web.public_api.todo.fetch_todos;
+package thapo.pocspring.web.public_api.todo;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +18,10 @@ import java.util.stream.StreamSupport;
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class FetchTodosAction {
-    public static final String PATH = "/fetch_todos";
-
     private final TodoRepository todoRepository;
+
+    public record FetchTodosResDto(List<TodoDto> todos) {
+    }
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
     public FetchTodosResDto fetchTodos() {

@@ -1,9 +1,11 @@
 package thapo.pocspring.infrastructure.error;
 
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
+@Getter
 public class AppException extends RuntimeException {
     final List<String> errors;
 
