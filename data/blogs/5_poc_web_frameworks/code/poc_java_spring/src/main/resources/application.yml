@@ -7,6 +7,11 @@ spring:
     password: "pocwebframeworks_password"
     hikari:
       schema: "pocwebframeworks_schema"
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: "http://localhost:11080/iam/realms/poc_web_frameworks"
 server:
   port: 11082
   servlet:
