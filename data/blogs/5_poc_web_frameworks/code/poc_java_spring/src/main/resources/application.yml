@@ -10,9 +10,17 @@ spring:
   security:
     oauth2:
       resourceserver:
-        jwt:
-          issuer-uri: "http://localhost:11080/iam/realms/poc_web_frameworks"
+        opaquetoken:
+          introspection-uri: http://localhost:11080/iam/realms/poc_web_frameworks/protocol/openid-connect/token/introspect
+          client-id: poc_web_frameworks_backend_client
+          client-secret: aaNOr50RPAK6yIqDeO6qNLlY7NPKpNJB
 server:
   port: 11082
   servlet:
     context-path: "/pocspring"
+
+logging:
+  level:
+    root: "debug"
+    org.springframework.web: "debug"
+    org.hibernate: "warn"
