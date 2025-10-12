@@ -21,6 +21,6 @@ server:
 
 logging:
   level:
-    root: "debug"
+    root: "info"
     org.springframework.web: "debug"
     org.hibernate: "warn"
