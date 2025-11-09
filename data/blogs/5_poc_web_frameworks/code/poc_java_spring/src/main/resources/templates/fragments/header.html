@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="header" style="display: flex; height: 48px; background-color: lightgray;">
+    <div>
+        <a th:href="@{/mpa/home}">home!</a>
+    </div>
+    <div>
+        <a th:href="@{/mpa/about}">about!</a>
+    </div>
+    <div style="flex: 1 1 0;"></div>
+    <div th:if="${name} != null">
+        <button th:text="${name}"></button>
+        <a style="appearance: button" th:href="@{/logout}">Logout</a>
+    </div>
+</div>
+
+</body>
+</html>
