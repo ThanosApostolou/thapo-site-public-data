@@ -1,18 +1,22 @@
 package thapo.pocspring.web.mpa;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import thapo.pocspring.infrastructure.auth.CustomOidcUser;
 import thapo.pocspring.web.mpa.about.AboutActions;
 
 @Controller
 @RequestMapping(MpaController.PATH)
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Slf4j
 public class MpaController {
     public static final String PATH = "/mpa";
 
@@ -25,15 +29,20 @@ public class MpaController {
 
 
     @GetMapping(path = "home")
-    public String homePage(@AuthenticationPrincipal final OAuth2AuthenticatedPrincipal oAuth2AuthenticatedPrincipal, final Model model) {
-        model.addAttribute("name", oAuth2AuthenticatedPrincipal != null ? oAuth2AuthenticatedPrincipal.getName() : null);
+    public String homePage(@AuthenticationPrincipal final CustomOidcUser customOidcUser, final Model model) {
+        if (customOidcUser != null) {
+            log.info("customOidcUser class: {}, roles={}", customOidcUser.getClass().getName(), customOidcUser.getClaims());
+            model.addAttribute("name", customOidcUser.getName());
+            model.addAttribute("authorities", String.join(",", customOidcUser.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList()));
+            model.addAttribute("claims", customOidcUser.getClaims().values().stream().map(Object::toString).toList());
+        }
         return "home/index";
     }
 
 
     @GetMapping("about")
-    public String aboutPage(Model model) {
-        aboutActions.aboutModel(model);
+    public String aboutPage(@AuthenticationPrincipal final OAuth2AuthenticatedPrincipal oAuth2AuthenticatedPrincipal, Model model) {
+        model.addAttribute("name", oAuth2AuthenticatedPrincipal != null ? oAuth2AuthenticatedPrincipal.getName() : null);
         return "about/index";
     }
 

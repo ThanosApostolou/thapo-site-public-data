@@ -1,6 +1,7 @@
 package thapo.pocspring.infrastructure.web;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -12,6 +13,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
         resourceHandlerRegistry
                 .addResourceHandler("/public/**")
                 .addResourceLocations("/resources/public/");
+    }
+
+    @Override
+    public void addCorsMappings(final CorsRegistry registry) {
+        registry.addMapping("/**");
     }
 
 }

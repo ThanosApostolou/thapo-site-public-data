@@ -1,5 +1,6 @@
 package thapo.pocspring.infrastructure.auth;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
+@Slf4j
 public class WebSecurityConfig {
     @Value("${spring.security.oauth2.resourceserver.opaquetoken.introspection-uri}")
     private String introspectionUri;
@@ -40,7 +42,6 @@ public class WebSecurityConfig {
         return resolver;
     }
 
-
     @Bean
     @Order(1)
     public SecurityFilterChain filterChainRest(final HttpSecurity http) throws Exception {
@@ -58,16 +59,18 @@ public class WebSecurityConfig {
                 .sessionManagement(securitySessionManagementConfigurer ->
                         securitySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer((httpSecurityOAuth2ResourceServerConfigurer) ->
-                        httpSecurityOAuth2ResourceServerConfigurer.opaqueToken(opaqueTokenConfigurer -> {
-                            opaqueTokenConfigurer.introspector(new CustomOpaqueTokenIntrospector(introspectionUri, clientId, clientSecret));
-                        }));
+                        httpSecurityOAuth2ResourceServerConfigurer
+                                .opaqueToken(opaqueTokenConfigurer -> {
+                                    opaqueTokenConfigurer
+                                            .introspector(new CustomOpaqueTokenIntrospector(introspectionUri, clientId, clientSecret));
+                                }));
         return http.build();
     }
 
     @Bean
     @Order(1)
     public SecurityFilterChain filterChainMpa(final HttpSecurity http, final ClientRegistrationRepository clientRegistrationRepository,
-                                              final OAuth2AuthorizationRequestResolver resolver) throws Exception {
+                                              final OAuth2AuthorizationRequestResolver resolver, final CustomOidcUserService customOidcUserService) throws Exception {
         // Mutli page application auth
         http
                 .securityMatcher("/**")
@@ -84,6 +87,9 @@ public class WebSecurityConfig {
                         securitySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .oauth2Login(oAuth2LoginConfigurer ->
                         oAuth2LoginConfigurer
+                                .userInfoEndpoint(userInfoEndpointConfig ->
+                                        userInfoEndpointConfig
+                                                .oidcUserService(customOidcUserService))
                                 .authorizationEndpoint(authorizationEndpointConfig ->
                                         authorizationEndpointConfig.authorizationRequestResolver(resolver)))
                 .oauth2Client(Customizer.withDefaults())
