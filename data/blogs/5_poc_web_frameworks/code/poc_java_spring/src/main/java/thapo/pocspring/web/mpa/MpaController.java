@@ -3,6 +3,7 @@ package thapo.pocspring.web.mpa;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import thapo.pocspring.infrastructure.auth.CustomOidcUser;
+import thapo.pocspring.infrastructure.auth.Roles;
 import thapo.pocspring.web.mpa.about.AboutActions;
 
 @Controller
@@ -41,14 +43,15 @@ public class MpaController {
 
 
     @GetMapping("about")
+    @PreAuthorize("hasRole('" + Roles.SIMPLE + "')")
     public String aboutPage(@AuthenticationPrincipal final OAuth2AuthenticatedPrincipal oAuth2AuthenticatedPrincipal, Model model) {
         model.addAttribute("name", oAuth2AuthenticatedPrincipal != null ? oAuth2AuthenticatedPrincipal.getName() : null);
         return "about/index";
     }
 
 
-    @GetMapping("401")
-    public String notAuthorized(Model model) {
-        return "401";
+    @GetMapping("403")
+    public String forbidden(Model model) {
+        return "403";
     }
 }

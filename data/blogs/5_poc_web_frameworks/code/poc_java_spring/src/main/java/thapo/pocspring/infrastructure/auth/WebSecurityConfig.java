@@ -44,36 +44,11 @@ public class WebSecurityConfig {
 
     @Bean
     @Order(1)
-    public SecurityFilterChain filterChainRest(final HttpSecurity http) throws Exception {
-        // rest auth
-        http
-                .securityMatcher("/actuator/**", "/public_api/**", "/api/**")
-                .cors(Customizer.withDefaults()) // use WebMVC cors configuration
-                .csrf(CsrfConfigurer::disable) // disable csrf
-                .authorizeHttpRequests((authorizationManagerRequestMatcherRegistry) -> {
-                    authorizationManagerRequestMatcherRegistry.requestMatchers("/actuator/**").permitAll();
-                    authorizationManagerRequestMatcherRegistry.requestMatchers("/public_api/**").permitAll();
-                    authorizationManagerRequestMatcherRegistry.requestMatchers("/api/**").authenticated();
-                    authorizationManagerRequestMatcherRegistry.anyRequest().denyAll();
-                })
-                .sessionManagement(securitySessionManagementConfigurer ->
-                        securitySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .oauth2ResourceServer((httpSecurityOAuth2ResourceServerConfigurer) ->
-                        httpSecurityOAuth2ResourceServerConfigurer
-                                .opaqueToken(opaqueTokenConfigurer -> {
-                                    opaqueTokenConfigurer
-                                            .introspector(new CustomOpaqueTokenIntrospector(introspectionUri, clientId, clientSecret));
-                                }));
-        return http.build();
-    }
-
-    @Bean
-    @Order(1)
     public SecurityFilterChain filterChainMpa(final HttpSecurity http, final ClientRegistrationRepository clientRegistrationRepository,
                                               final OAuth2AuthorizationRequestResolver resolver, final CustomOidcUserService customOidcUserService) throws Exception {
         // Mutli page application auth
         http
-                .securityMatcher("/**")
+                .securityMatcher("/", "/mpa/**", "/login/**", "/logout/**", "/oauth2/**")
                 .cors(Customizer.withDefaults()) // use WebMVC cors configuration
                 .csrf(Customizer.withDefaults()) // use default session based csrf
                 .authorizeHttpRequests((authorizationManagerRequestMatcherRegistry) -> {
@@ -94,7 +69,31 @@ public class WebSecurityConfig {
                                         authorizationEndpointConfig.authorizationRequestResolver(resolver)))
                 .oauth2Client(Customizer.withDefaults())
                 .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
-                        httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/mpa/401"));
+                        httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/mpa/403"));
+        return http.build();
+    }
+
+    @Bean
+    @Order(2)
+    public SecurityFilterChain filterChainRest(final HttpSecurity http) throws Exception {
+        // rest auth
+        http
+                .cors(Customizer.withDefaults()) // use WebMVC cors configuration
+                .csrf(CsrfConfigurer::disable) // disable csrf
+                .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
+                    authorizationManagerRequestMatcherRegistry.requestMatchers("/actuator/**").permitAll();
+                    authorizationManagerRequestMatcherRegistry.requestMatchers("/public_api/**").permitAll();
+                    authorizationManagerRequestMatcherRegistry.requestMatchers("/api/**").authenticated();
+                    authorizationManagerRequestMatcherRegistry.anyRequest().denyAll();
+                })
+                .sessionManagement(securitySessionManagementConfigurer ->
+                        securitySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .oauth2ResourceServer(httpSecurityOAuth2ResourceServerConfigurer ->
+                        httpSecurityOAuth2ResourceServerConfigurer
+                                .opaqueToken(opaqueTokenConfigurer -> {
+                                    opaqueTokenConfigurer
+                                            .introspector(new CustomOpaqueTokenIntrospector(introspectionUri, clientId, clientSecret));
+                                }));
         return http.build();
     }
 
