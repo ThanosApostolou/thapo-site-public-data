@@ -1,6 +1,5 @@
 package thapo.pocspring.domain.todo;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,20 +18,20 @@ public class TodoValidator {
     }
 
     public String validateTitle(final String title, final List<String> errors) {
-        final String titleStripped = StringUtils.strip(title);
-        if (StringUtils.isEmpty(titleStripped)) {
+        final String titleStripped = title != null ? title.strip() : null;
+        if (titleStripped != null && !titleStripped.isEmpty()) {
             errors.add("title cannot be empty");
         }
         if (titleStripped != null) {
             if (titleStripped.length() > 200) {
-                errors.add(String.format("title={} has greater length than 200", titleStripped));
+                errors.add(String.format("title=%s has greater length than 200", titleStripped));
             }
         }
         return titleStripped;
     }
 
     public String validateDescription(final String description, final List<String> errors) {
-        final String descriptionStripped = StringUtils.strip(description);
+        final String descriptionStripped = description != null ? description.strip() : null;
         if (descriptionStripped != null) {
             if (descriptionStripped.length() > 2000) {
                 errors.add(String.format("description=%s has greater length than 2000", descriptionStripped));

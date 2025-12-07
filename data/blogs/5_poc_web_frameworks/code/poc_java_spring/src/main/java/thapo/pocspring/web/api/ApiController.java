@@ -16,4 +16,6 @@ public class ApiController {
         return ResponseEntity.ok()
                 .body("some test message from protected api");
     }
+
+    
 }

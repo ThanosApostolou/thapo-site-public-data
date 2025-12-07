@@ -40,7 +40,7 @@ We can specify HTTP methods (method = RequestMethod.xxx):
 
 We can specify `produces="some/mediaType"` (or `produces={"some/mediaType", "other/mediaType"}`) and `accepts="some/mediaType"` (or `accepts={"some/mediaType", "other/mediaType"}`). Preferably to use MediaType constants like `MediaType.APPLICATION_JSON_VALUE`.
 
-c### Method Arguments:
+### Method Arguments:
 [Spring Web MVC/Annotated Controllers/Handler Methods/Method Arguments](https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-methods/arguments.html)
 
 - WebRequest, NativeWebRequest
@@ -60,7 +60,7 @@ c### Method Arguments:
 - @RequestHeader
 - @CookieValue
 - @RequestBody
-- HttpEntity<B>
+- `HttpEntity<B>`
 - @RequestPart
 - java.util.Map, org.springframework.ui.Model, org.springframework.ui.ModelMap
 - RedirectAttributes
@@ -74,7 +74,7 @@ c### Method Arguments:
 ### Return Values:
 [Spring Web MVC/Annotated Controllers/Handler Methods/Return Values](https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-methods/return-types.html)
 - @ResponseBody
-- HttpEntity<B>, ResponseEntity<B>
+- `HttpEntity<B>`, `ResponseEntity<B>`
 - HttpHeaders
 - ErrorResponse, ProblemDetail
 - String
@@ -93,10 +93,24 @@ c### Method Arguments:
 ## HTTP html templates
 TODO
 
-## Static Files
+## Files Resources
+
+### Static Resources
+- [Spring Web MVC/MVC Config/Static Resources](https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-config/static-resources.html)
+
+See implementation `thapo.pocspring.infrastructure.web.WebMvcConfig.addResourceHandlers()`
+
+### Dynamic Resources
+- [Core Technologies/Resources](https://docs.spring.io/spring-framework/reference/core/resources.html)
+
+See implementation `thapo.pocspring.web.public_api.file.FileController`
 
 ## HTTP Stream
 [Spring Web MVC/Asynchronous Requests#mvc-ann-async-http-streaming](https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-ann-async.html#mvc-ann-async-http-streaming)
+
+
+See implementation `thapo.pocspring.web.public_api.stream.StreamController.fetchStream()`
+
 
 ## GraphQL
 TODO
@@ -105,6 +119,15 @@ TODO
 TODO
 
 ## CORS
+- [Web on Servlet Stack/Spring Web MVC/CORS](https://docs.spring.io/spring-framework/reference/web/webmvc-cors.html)
+
+See implementation `thapo.pocspring.infrastructure.web.WebMvcConfig.addCorsMappings()`
+
+When using Spring security use
+```java
+http.cors(Customizer.withDefaults()) // use WebMVC cors configuration
+```
+in order to use same configuration as WebMVC
 
 ## Security
 https://docs.spring.io/spring-security/reference/servlet/configuration/java.html

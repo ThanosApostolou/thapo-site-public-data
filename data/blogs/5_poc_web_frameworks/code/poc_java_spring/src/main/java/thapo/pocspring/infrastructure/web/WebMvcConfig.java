@@ -12,7 +12,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(final ResourceHandlerRegistry resourceHandlerRegistry) {
         resourceHandlerRegistry
                 .addResourceHandler("/public/**")
-                .addResourceLocations("/resources/public/");
+                .addResourceLocations("file:../files/public/");
     }
 
     @Override

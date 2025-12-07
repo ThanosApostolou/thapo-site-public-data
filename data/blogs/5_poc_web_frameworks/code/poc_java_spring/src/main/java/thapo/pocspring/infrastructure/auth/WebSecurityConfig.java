@@ -51,7 +51,7 @@ public class WebSecurityConfig {
                 .securityMatcher("/", "/mpa/**", "/login/**", "/logout/**", "/oauth2/**")
                 .cors(Customizer.withDefaults()) // use WebMVC cors configuration
                 .csrf(Customizer.withDefaults()) // use default session based csrf
-                .authorizeHttpRequests((authorizationManagerRequestMatcherRegistry) -> {
+                .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
                     authorizationManagerRequestMatcherRegistry.requestMatchers("/", "/mpa", "/mpa/home", "/login/oauth2/code/**", "/login").permitAll();
                     authorizationManagerRequestMatcherRegistry.requestMatchers("/mpa/**").authenticated();
                     authorizationManagerRequestMatcherRegistry.anyRequest().denyAll();
@@ -82,7 +82,7 @@ public class WebSecurityConfig {
                 .csrf(CsrfConfigurer::disable) // disable csrf
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
                     authorizationManagerRequestMatcherRegistry.requestMatchers("/actuator/**").permitAll();
-                    authorizationManagerRequestMatcherRegistry.requestMatchers("/public_api/**").permitAll();
+                    authorizationManagerRequestMatcherRegistry.requestMatchers("/public_api/**", "/api/stream/**", "/public/**").permitAll();
                     authorizationManagerRequestMatcherRegistry.requestMatchers("/api/**").authenticated();
                     authorizationManagerRequestMatcherRegistry.anyRequest().denyAll();
                 })
@@ -90,10 +90,9 @@ public class WebSecurityConfig {
                         securitySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(httpSecurityOAuth2ResourceServerConfigurer ->
                         httpSecurityOAuth2ResourceServerConfigurer
-                                .opaqueToken(opaqueTokenConfigurer -> {
-                                    opaqueTokenConfigurer
-                                            .introspector(new CustomOpaqueTokenIntrospector(introspectionUri, clientId, clientSecret));
-                                }));
+                                .opaqueToken(opaqueTokenConfigurer ->
+                                        opaqueTokenConfigurer
+                                                .introspector(new CustomOpaqueTokenIntrospector(introspectionUri, clientId, clientSecret))));
         return http.build();
     }
 
