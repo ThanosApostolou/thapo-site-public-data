@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserSource;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
@@ -33,7 +34,9 @@ public class CustomOidcUserService extends OidcUserService {
         }
     }
 
-    private CustomOidcUser oidcUserMapper(final OidcUserRequest oidcUserRequest, final OidcUserInfo oidcUserInfo) {
+    private CustomOidcUser oidcUserConverter(final OidcUserSource oidcUserSource) {
+        final OidcUserRequest oidcUserRequest = oidcUserSource.getUserRequest();
+        final OidcUserInfo oidcUserInfo = oidcUserSource.getUserInfo();
         Set<GrantedAuthority> authorities = new LinkedHashSet<>();
         ClientRegistration.ProviderDetails providerDetails = oidcUserRequest.getClientRegistration().getProviderDetails();
         String userNameAttributeName = providerDetails.getUserInfoEndpoint().getUserNameAttributeName();
@@ -68,7 +71,7 @@ public class CustomOidcUserService extends OidcUserService {
     @Override
     public CustomOidcUser loadUser(final OidcUserRequest userRequest) {
         log.info("CustomOidcUserService.loadUser: userRequest={}", userRequest);
-        setOidcUserMapper(this::oidcUserMapper);
+        setOidcUserConverter(this::oidcUserConverter);
 
         // Load the user from the provider
         return (CustomOidcUser) super.loadUser(userRequest);

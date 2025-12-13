@@ -111,13 +111,6 @@ See implementation `thapo.pocspring.web.public_api.file.FileController`
 
 See implementation `thapo.pocspring.web.public_api.stream.StreamController.fetchStream()`
 
-
-## GraphQL
-TODO
-
-## WebSockets
-TODO
-
 ## CORS
 - [Web on Servlet Stack/Spring Web MVC/CORS](https://docs.spring.io/spring-framework/reference/web/webmvc-cors.html)
 
@@ -129,18 +122,16 @@ http.cors(Customizer.withDefaults()) // use WebMVC cors configuration
 ```
 in order to use same configuration as WebMVC
 
-## Security
+## Auth
 https://docs.spring.io/spring-security/reference/servlet/configuration/java.html
 https://www.baeldung.com/spring-boot-keycloak
 
-## Database
-DOCS: https://docs.spring.io/spring-framework/reference/data-access.html
+## WebSockets
+TODO
 
-spring data jpa
+## GraphQL
+TODO
 
-spring jdbc templates
-
-connection pool (HikariCP)
 
 ## Logging
 - https://docs.spring.io/spring-framework/reference/core/spring-jcl.html
@@ -152,3 +143,12 @@ connection pool (HikariCP)
 ## Metrics
 
 ## Testing
+
+## Database
+DOCS: https://docs.spring.io/spring-framework/reference/data-access.html
+
+spring data jpa
+
+spring jdbc templates
+
+connection pool (HikariCP)

@@ -1,6 +1,6 @@
 plugins {
     java
-    id("org.springframework.boot") version "3.5.6"
+    id("org.springframework.boot") version "4.0.0"
     id("io.spring.dependency-management") version "1.1.7"
 }
 
@@ -46,7 +46,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
-
+    // WebSocket
+    implementation("org.springframework.boot:spring-boot-starter-websocket")
+    testImplementation("org.springframework.boot:spring-boot-starter-websocket-test")
 
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
     runtimeOnly("org.postgresql:postgresql:42.7.7")

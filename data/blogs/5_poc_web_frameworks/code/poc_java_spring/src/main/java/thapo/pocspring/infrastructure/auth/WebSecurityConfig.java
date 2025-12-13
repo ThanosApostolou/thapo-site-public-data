@@ -83,7 +83,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
                     authorizationManagerRequestMatcherRegistry.requestMatchers("/actuator/**").permitAll();
                     authorizationManagerRequestMatcherRegistry.requestMatchers("/public_api/**", "/api/stream/**", "/public/**").permitAll();
-                    authorizationManagerRequestMatcherRegistry.requestMatchers("/api/**").authenticated();
+                    authorizationManagerRequestMatcherRegistry.requestMatchers("/api/**", "/ws/**").authenticated();
                     authorizationManagerRequestMatcherRegistry.anyRequest().denyAll();
                 })
                 .sessionManagement(securitySessionManagementConfigurer ->
