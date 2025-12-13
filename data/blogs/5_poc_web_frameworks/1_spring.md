@@ -127,7 +127,11 @@ https://docs.spring.io/spring-security/reference/servlet/configuration/java.html
 https://www.baeldung.com/spring-boot-keycloak
 
 ## WebSockets
-TODO
+- [Web on Servlet Stack/WebSockets](https://docs.spring.io/spring-framework/reference/web/websocket.html)
+- [Using WebSocket to build an interactive web application](https://spring.io/guides/gs/messaging-stomp-websocket)
+- [Spring Boot + WebSocket example without STOMP and SockJs](https://www.devglan.com/spring-boot/spring-websocket-integration-example-without-stomp#:~:text=This%20means%20when%20we%20do,make%20websocket%20connection%20without%20STOMP.)
+
+See implementation `thapo.pocspring.infrastructure.web.WebSocketConfig` and `thapo.pocspring.web.ws.ChatWebSocketHandler`
 
 ## GraphQL
 TODO

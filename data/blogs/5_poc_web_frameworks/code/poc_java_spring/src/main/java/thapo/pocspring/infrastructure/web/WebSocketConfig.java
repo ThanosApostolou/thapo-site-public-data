@@ -20,9 +20,9 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(final WebSocketHandlerRegistry registry) {
-        // register raw websocket endpoint at /ws (no STOMP)
+        // register raw websocket endpoint at /ws/chat
         registry.addHandler(chatWebSocketHandler, "/ws/chat")
-                .setAllowedOriginPatterns("*"); // restrict in prod
-        // .withSockJS(); // optional fallback if you need SockJS
+                .setAllowedOriginPatterns();
+//                .withSockJS(); // optional fallback if you need SockJS
     }
 }
