@@ -3,6 +3,7 @@ package thapo.pocspring.domain.todo;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import thapo.pocspring.domain.user.User;
 
 import java.time.OffsetDateTime;
 
@@ -20,4 +21,8 @@ public class Todo {
     private String description;
     @Column(name = "due_date", nullable = true)
     private OffsetDateTime dueDate;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "user_fk", nullable = false, referencedColumnName = "id")
+    private User user;
 }

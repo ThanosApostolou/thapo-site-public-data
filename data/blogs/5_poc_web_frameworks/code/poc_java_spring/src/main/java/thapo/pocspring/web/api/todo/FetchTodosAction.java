@@ -1,4 +1,4 @@
-package thapo.pocspring.web.public_api.todo;
+package thapo.pocspring.web.api.todo;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

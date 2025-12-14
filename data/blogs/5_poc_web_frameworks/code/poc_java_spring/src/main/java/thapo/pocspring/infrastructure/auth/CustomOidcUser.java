@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import java.util.*;
 
 @Slf4j
-public class CustomOidcUser implements OidcUser {
+public class CustomOidcUser implements OidcUser, CustomOAuth2AuthenticatedPrincipalI {
     private final OidcUser delegate;
 
     public CustomOidcUser(final OidcUser delegate) {
@@ -60,8 +60,14 @@ public class CustomOidcUser implements OidcUser {
         return delegate.getIdToken();
     }
 
+    @Override
     public String getSub() {
         return getClaimAsString("sub");
+    }
+
+    @Override
+    public String getEmail() {
+        return getClaimAsString("email");
     }
 
     public List<String> getScopes() {

@@ -81,7 +81,7 @@ public class WebSecurityConfig {
                 .cors(Customizer.withDefaults()) // use WebMVC cors configuration
                 .csrf(CsrfConfigurer::disable) // disable csrf
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
-                    authorizationManagerRequestMatcherRegistry.requestMatchers("/actuator/**").permitAll();
+                    authorizationManagerRequestMatcherRegistry.requestMatchers("/actuator/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll();
                     authorizationManagerRequestMatcherRegistry.requestMatchers("/public_api/**", "/api/stream/**", "/public/**").permitAll();
                     authorizationManagerRequestMatcherRegistry.requestMatchers("/api/**", "/ws/**").authenticated();
                     authorizationManagerRequestMatcherRegistry.anyRequest().denyAll();

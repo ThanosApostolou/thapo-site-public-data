@@ -6,14 +6,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 import org.springframework.security.oauth2.core.OAuth2TokenIntrospectionClaimAccessor;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class CustomOAuth2AuthenticatedPrincipal implements OAuth2TokenIntrospectionClaimAccessor, OAuth2User, OAuth2AuthenticatedPrincipal, Serializable {
+public class CustomOAuth2AuthenticatedPrincipal implements OAuth2TokenIntrospectionClaimAccessor, CustomOAuth2AuthenticatedPrincipalI {
     private final OAuth2AuthenticatedPrincipal delegate;
     private final Set<GrantedAuthority> authorities;
 
@@ -43,7 +41,7 @@ public class CustomOAuth2AuthenticatedPrincipal implements OAuth2TokenIntrospect
 
     @Override
     public <A> A getAttribute(String name) {
-        return OAuth2User.super.getAttribute(name);
+        return CustomOAuth2AuthenticatedPrincipalI.super.getAttribute(name);
     }
 
     @Override
@@ -67,6 +65,7 @@ public class CustomOAuth2AuthenticatedPrincipal implements OAuth2TokenIntrospect
         return getAttributes();
     }
 
+    @Override
     public String getSub() {
         return getClaimAsString("sub");
     }
@@ -91,6 +90,7 @@ public class CustomOAuth2AuthenticatedPrincipal implements OAuth2TokenIntrospect
         return getClaimAsString("family_name");
     }
 
+    @Override
     public String getEmail() {
         return getClaimAsString("email");
     }

@@ -19,7 +19,7 @@ public class TodoValidator {
 
     public String validateTitle(final String title, final List<String> errors) {
         final String titleStripped = title != null ? title.strip() : null;
-        if (titleStripped != null && !titleStripped.isEmpty()) {
+        if (titleStripped == null || titleStripped.isEmpty()) {
             errors.add("title cannot be empty");
         }
         if (titleStripped != null) {

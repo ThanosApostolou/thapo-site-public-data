@@ -143,8 +143,21 @@ TODO
 
 
 ## OpenAPI
+- https://springdoc.org
+
+Add dependency `implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.0")`
+
 
 ## Metrics
+
+properties:
+```yaml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: [ 'health', 'prometheus' ]
+```
 
 ## Testing
 

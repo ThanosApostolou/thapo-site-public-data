@@ -42,3 +42,9 @@ logging:
     root: "info"
     org.springframework.web: "debug"
     org.hibernate: "warn"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: [ 'health', 'prometheus' ]

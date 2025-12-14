@@ -2,6 +2,7 @@ package thapo.pocspring.domain.todo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import thapo.pocspring.domain.user.UserDetails;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -19,7 +20,7 @@ public class TodoService {
     }
 
 
-    public Todo createNew(final TodoDto todoDto, final List<String> errors) {
+    public Todo createNew(final UserDetails userDetails, final TodoDto todoDto, final List<String> errors) {
         if (todoDto == null) {
             errors.add("todo cannot be null");
             return null;
@@ -35,11 +36,12 @@ public class TodoService {
         todo.setTitle(title);
         todo.setDescription(description);
         todo.setDueDate(dueDate);
+        todo.setUser(userDetails.user());
         return todo;
     }
 
 
-    public Todo updateTodo(final TodoDto todoDto, final List<String> errors) {
+    public Todo updateTodo(final UserDetails userDetails, final TodoDto todoDto, final List<String> errors) {
         if (todoDto == null) {
             errors.add("todo cannot be null");
             return null;
@@ -56,6 +58,9 @@ public class TodoService {
         if (todo == null) {
             errors.add(String.format("could not find todo with id=%s", id));
         }
+        if (todo != null && !todo.getUser().getId().equals(userDetails.user().getId())) {
+            errors.add(String.format("todo with id=%s does not belong to user with id=%s", id, userDetails.user().getId()));
+        }
         if (!errors.isEmpty()) {
             return null;
         }
@@ -67,14 +72,19 @@ public class TodoService {
     }
 
 
-    public void delete(final long id, final List<String> errors) {
+    public void delete(final UserDetails userDetails, final long id, final List<String> errors) {
         if (id < 0) {
             errors.add(String.format("id=%s should be greater than 0", id));
             return;
         }
-        final boolean exists = todoRepository.existsById(id);
-        if (!exists) {
+        final Todo todo = todoRepository.findById(id).orElse(null);
+        if (todo == null) {
             errors.add(String.format("could not find todo with id=%s", id));
+        }
+        if (todo != null && !todo.getUser().getId().equals(userDetails.user().getId())) {
+            errors.add(String.format("todo with id=%s does not belong to user with id=%s", id, userDetails.user().getId()));
+        }
+        if (!errors.isEmpty()) {
             return;
         }
         todoRepository.deleteById(id);

@@ -5,7 +5,7 @@ meta {
 }
 
 put {
-  url: http://localhost:11080/pocspring/public_api/todo/update_todo
+  url: http://localhost:11080/pocspring/api/todo/update_todo
   body: json
   auth: inherit
 }
@@ -21,4 +21,5 @@ body:json {
 
 settings {
   encodeUrl: true
+  timeout: 0
 }
